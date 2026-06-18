@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Optimization -->
+  <title>SARJ-CAM - Cyber-Sketch Retro Video Editor</title>
+  <meta name="description"
+    content="Single web-based studio for all your retro video editing projects. Cut, sync, and render in our premium tactile retro-futuristic interface." />
+
+  <!-- Preloads & Font Preconnects -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Custom Stylesheet (Linked directly, Vite compiles this) -->
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+
+  <!-- Floating Ambient Orbs (Jeton-style background elements) -->
+  <div class="ambient-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Outer Monitor Frame (Simulates viewfinder frame) -->
+  <div class="outer-frame">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="top-navbar">
+      <div class="nav-logo">
+        <span class="logo-accent">SARJ</span> - CAM EDIT
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="nav-links" role="navigation">
+        <a class="nav-link" href="/editor.html" style="color: var(--color-accent-pink); font-weight: 700;">Studio Editor</a>
+        <a class="nav-link" href="#personal">Personal</a>
+        <a class="nav-link" href="#business">Business</a>
+        <a class="nav-link" href="#company">Company</a>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav-actions">
+        <a href="/editor.html" class="btn btn-primary btn-animated" id="btn-navbar-editor" style="margin-right: 8px;">
+          <span class="btn-text-inner"><span class="btn-label"><span class="material-symbols-outlined" style="font-size:16px; vertical-align:middle; margin-right:4px;">movie_creation</span>Open Editor</span><span class="btn-label-clone"><span class="material-symbols-outlined" style="font-size:16px; vertical-align:middle; margin-right:4px;">movie_creation</span>Open Editor</span></span>
+        </a>
+        <a href="/login.html#login" class="btn btn-secondary btn-hide-mobile btn-animated" id="btn-login">
+          <span class="btn-text-inner"><span class="btn-label">Log in</span><span class="btn-label-clone">Log
+              in</span></span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+
+      <!-- HERO SECTION (Split-Screen Layout) -->
+      <section class="hero-section" id="hero-area">
+
+        <!-- Left Side: Copy and CTAs -->
+        <div class="hero-left">
+          <h1 class="hero-headline" id="hero-headline-split">
+            One website<br />for all your<br /><span class="text-highlight">edits</span>
+          </h1>
+
+          <div class="hero-copy-container reveal-up">
+            <p class="hero-copy">
+              A single studio for all your video projects. Cut, sync, and create with a tactile, retro-futuristic
+              interface. High fidelity exports on the fly.
+            </p>
+
+            <div class="hero-actions">
+              <a href="/editor.html" class="btn btn-primary btn-animated" id="cta-get-website">
+                <span class="btn-text-inner"><span class="btn-label"><span
+                      class="material-symbols-outlined">movie_creation</span> Start Editing</span><span
+                    class="btn-label-clone"><span class="material-symbols-outlined">movie_creation</span> Start
+                    Editing</span></span>
+              </a>
+              <a href="/editor.html" class="btn btn-secondary btn-animated" id="cta-demo">
+                <span class="btn-text-inner"><span class="btn-label"><span
+                      class="material-symbols-outlined">play_arrow</span> Try Demo</span><span class="btn-label-clone"><span
+                      class="material-symbols-outlined">play_arrow</span> Try Demo</span></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Camcorder Viewport displaying download.gif -->
+        <div class="hero-right reveal-right">
+          <div class="camcorder-viewport" id="camcorder-frame">
+            <!-- Viewfinder corner brackets -->
+            <div class="camcorder-corner corner-tl"></div>
+            <div class="camcorder-corner corner-tr"></div>
+            <div class="camcorder-corner corner-bl"></div>
+            <div class="camcorder-corner corner-br"></div>
+
+            <!-- Viewfinder OSD Header -->
+            <div class="camcorder-header">
+              <div class="rec-container">
+                <span class="rec-dot blink"></span>
+                <span class="rec-label">REC</span>
+              </div>
+              <div class="battery-container">
+                <span class="material-symbols-outlined"
+                  style="font-size: 18px; vertical-align: middle;">battery_full</span>
+                100%
+              </div>
+            </div>
+
+            <!-- Viewfinder Screen displaying download.gif -->
+            <div class="camcorder-screen">
+              <!-- Tape Indicator overlay -->
+              <div class="screen-overlay-tape">
+                <span class="tape-reel" id="tape-reel-indicator"></span>
+                <span>PLAY A:01</span>
+              </div>
+
+              <!-- Primary Asset -->
+              <img class="screen-gif" src="/download.gif" alt="Cyber-sketch retro anime animation preview"
+                id="primary-visual-asset" />
+
+              <!-- live-updated Timecode overlay -->
+              <div class="screen-overlay-timecode" id="live-timecode">00:04:20:00</div>
+            </div>
+          </div>
+
+          <!-- Floating badge (Jeton-style floating UI element) -->
+          <div class="hero-float-badge" id="float-badge">
+            <span class="float-badge-dot"></span>
+            <span class="float-badge-text">LIVE EDITING</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- MARQUEE TICKER STRIP (Jeton-style) -->
+      <div class="marquee-section" id="marquee-strip" aria-label="Feature highlights">
+        <div class="marquee-track">
+          <div class="marquee-content">
+            <span class="marquee-item"><span class="material-symbols-outlined">content_cut</span> Cut</span>
+            <span class="marquee-sep">◆</span>
+            <span class="marquee-item"><span class="material-symbols-outlined">sync</span> Sync</span>
+            <span class="marquee-sep">◆</span>
+            <span class="marquee-item"><span class="material-symbols-outlined">movie_creation</span> Create</span>
+            <span class="marquee-sep">◆</span>
+            <span class="marquee-item"><span class="material-symbols-outlined">cloud_upload</span> Export</span>
+            <span class="marquee-sep">◆</span>
+            <span class="marquee-item"><span class="material-symbols-outlined">tune</span> Colour Grade</span>
+            <span class="marquee-sep">◆</span>
+            <span class="marquee-item"><span class="material-symbols-outlined">music_note</span> Audio Sync</span>
+            <span class="marquee-sep">◆</span>
+            <span class="marquee-item"><span class="material-symbols-outlined">video_library</span> Timeline</span>
+            <span class="marquee-sep">◆</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="marquee-item"><span class="material-symbols-outlined">content_cut</span> Cut</span>
+            <span class="marquee-sep">◆</span>
+            <span class="marquee-item"><span class="material-symbols-outlined">sync</span> Sync</span>
+            <span class="marquee-sep">◆</span>
+            <span class="marquee-item"><span class="material-symbols-outlined">movie_creation</span> Create</span>
+            <span class="marquee-sep">◆</span>
+            <span class="marquee-item"><span class="material-symbols-outlined">cloud_upload</span> Export</span>
+            <span class="marquee-sep">◆</span>
+            <span class="marquee-item"><span class="material-symbols-outlined">tune</span> Colour Grade</span>
+            <span class="marquee-sep">◆</span>
+            <span class="marquee-item"><span class="material-symbols-outlined">music_note</span> Audio Sync</span>
+            <span class="marquee-sep">◆</span>
+            <span class="marquee-item"><span class="material-symbols-outlined">video_library</span> Timeline</span>
+            <span class="marquee-sep">◆</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURE STRIP (Flex / Grid Cards) -->
+      <section class="feature-strip" id="features">
+
+        <!-- Card 1 -->
+        <div class="feature-card reveal-up" id="feature-cut" style="--reveal-delay: 0ms">
+          <div class="feature-icon-wrapper bg-cyan-soft">
+            <span class="material-symbols-outlined" style="font-size: 32px;">content_cut</span>
+          </div>
+          <h3 class="feature-title">Cut</h3>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="feature-card reveal-up" id="feature-sync" style="--reveal-delay: 120ms">
+          <div class="feature-icon-wrapper bg-pink-soft">
+            <span class="material-symbols-outlined" style="font-size: 32px;">sync</span>
+          </div>
+          <h3 class="feature-title">Sync</h3>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="feature-card reveal-up" id="feature-create" style="--reveal-delay: 240ms">
+          <div class="feature-icon-wrapper bg-blue-soft">
+            <span class="material-symbols-outlined" style="font-size: 32px;">movie_creation</span>
+          </div>
+          <h3 class="feature-title">Create</h3>
+        </div>
+
+      </section>
+
+      <!-- STATS COUNTER SECTION (Jeton-style) -->
+      <section class="stats-section reveal-up" id="stats-area">
+        <div class="stats-grid">
+          <div class="stat-item" id="stat-1">
+            <div class="stat-number" data-target="50">0</div>
+            <div class="stat-suffix">+</div>
+            <p class="stat-label">Export Formats</p>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item" id="stat-2">
+            <div class="stat-number" data-target="99">0</div>
+            <div class="stat-suffix">%</div>
+            <p class="stat-label">Uptime</p>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item" id="stat-3">
+            <div class="stat-number" data-target="10">0</div>
+            <div class="stat-suffix">K+</div>
+            <p class="stat-label">Creators</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTENT BLOCK 1 (Unify your edits - Cyan Card) -->
+      <section class="block-container" id="unify-section">
+        <h2 class="block-title-large reveal-up">Unify your edits</h2>
+
+        <div class="content-block-cyan reveal-up" style="--reveal-delay: 100ms">
+          <div class="cyan-left">
+            <div class="cyan-item">
+              <h3>Web-Based Rendering</h3>
+              <p>Render your visions, effortlessly across Europe or anywhere. One App.</p>
+            </div>
+            <div class="cyan-item">
+              <h3>Fast and safe exports</h3>
+              <p>Fast and safe transactions at your fingertips. 50+ export methods.</p>
+            </div>
+          </div>
+
+          <div class="cyan-right">
+            <div class="cyan-right-card" id="cyan-tilt-card">
+              <div class="card-header-bar">
+                <span>Simple, fast &amp; safe</span>
+                <span class="material-symbols-outlined">rocket_launch</span>
+              </div>
+
+              <div class="card-list-flow">
+                <div class="flow-step flow-step-anim" style="--step-delay: 0ms">
+                  <span>01 Project</span>
+                  <span class="step-indicator step-cyan"></span>
+                </div>
+                <div class="flow-step flow-step-anim" style="--step-delay: 150ms">
+                  <span>02 Edit</span>
+                  <span class="step-indicator step-pink"></span>
+                </div>
+                <div class="flow-step flow-step-anim" style="--step-delay: 300ms">
+                  <span>03 Render</span>
+                  <span class="step-indicator step-blue"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCROLL STACK SECTION (Jeton's signature stacking cards) -->
+      <section class="scroll-stack-wrapper" id="scroll-stack-area" aria-label="How it works">
+        <div class="scroll-stack-header reveal-up">
+          <h2 class="block-title-large" style="margin-bottom: 0;">How it works</h2>
+          <p class="scroll-stack-sub">Three steps to your perfect edit</p>
+        </div>
+
+        <div class="scroll-stack-sticky" id="scroll-stack-sticky">
+          <!-- Card 1 -->
+          <div class="stack-card stack-card-1" id="stack-card-1" data-index="0">
+            <div class="stack-card-inner">
+              <div class="stack-card-num">01</div>
+              <div class="stack-card-content">
+                <div class="stack-card-icon">
+                  <span class="material-symbols-outlined" style="font-size: 40px;">folder_open</span>
+                </div>
+                <h3 class="stack-card-title">Start your Project</h3>
+                <p class="stack-card-body">Import your raw footage, set your timeline, and let SARJ-CAM organise your
+                  assets into a clean workspace ready for editing.</p>
+              </div>
+              <!-- GIF placeholder for stack card -->
+              <div class="stack-card-visual stack-visual-1">
+                <div class="stack-visual-inner">
+                  <span class="material-symbols-outlined" style="font-size: 64px; opacity: 0.3;">movie</span>
+                  <img src="/import.jpg" alt="Import GIF" class="stack-visual-img" style="max-width:100%; height:auto;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="stack-card stack-card-2" id="stack-card-2" data-index="1">
+            <div class="stack-card-inner">
+              <div class="stack-card-num">02</div>
+              <div class="stack-card-content">
+                <div class="stack-card-icon">
+                  <span class="material-symbols-outlined" style="font-size: 40px;">edit_note</span>
+                </div>
+                <h3 class="stack-card-title">Edit with Precision</h3>
+                <p class="stack-card-body">Use our tactile retro interface to cut, sync and colour grade. Custom
+                  keyboard shortcuts and hardware controller support built in.</p>
+              </div>
+              <div class="stack-card-visual stack-visual-2">
+                <div class="stack-visual-inner">
+                  <span class="material-symbols-outlined" style="font-size: 64px; opacity: 0.3;">tune</span>
+                  <img src="/editor.jpg" alt="Editor GIF" class="stack-visual-img" style="max-width:100%; height:auto;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="stack-card stack-card-3" id="stack-card-3" data-index="2">
+            <div class="stack-card-inner">
+              <div class="stack-card-num">03</div>
+              <div class="stack-card-content">
+                <div class="stack-card-icon">
+                  <span class="material-symbols-outlined" style="font-size: 40px;">cloud_done</span>
+                </div>
+                <h3 class="stack-card-title">Render &amp; Export</h3>
+                <p class="stack-card-body">Render directly from the browser. Choose from 50+ export formats and push to
+                  the cloud in seconds. Your audience is waiting.</p>
+              </div>
+              <div class="stack-card-visual stack-visual-3">
+                <div class="stack-visual-inner">
+                  <span class="material-symbols-outlined" style="font-size: 64px; opacity: 0.3;">cloud_upload</span>
+                  <img src="export.png" alt="Export GIF" class="stack-visual-img" style="max-width:100%; height:auto;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress dots -->
+        <div class="stack-progress" id="stack-progress" aria-hidden="true">
+          <div class="stack-dot stack-dot-active" data-index="0"></div>
+          <div class="stack-dot" data-index="1"></div>
+          <div class="stack-dot" data-index="2"></div>
+        </div>
+      </section>
+
+      <!-- CONTENT BLOCK 2 (Tactile Interface split screen) -->
+      <section class="content-block-tactile" id="tactile-section">
+
+        <!-- Left Column: Video editing asset -->
+        <div class="tactile-left reveal-left">
+          <div class="tactile-card" id="tactile-tilt-card">
+            <img
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRp51jMBMSnVHKrP92yJChwueqzReXeWKPleEY7LTZeUu8IqS2cnMFu9L3XJsCpKE5tpt_ccWNwJFxMu5X4EuyQd2k0V5TP4xRaam88-76QlE_hSEZ5e_KVtGv5amTQEzWWaL_TeweLHuxQMEfIwdB8aFGhzAQhtkOgTxjybTv3uPMhMNcnLe_OFtnChAqQ35Kpb2zP8nlwkXaZSsRv0ZKPsY1klb9GYcMUZYgyo3DCrL6d_6VUv0q-2o6oNUPJoEr2CEIw7z0bpUO"
+              alt="Tactile video editing keyboard interface screenshot" />
+          </div>
+        </div>
+
+        <!-- Right Column: Detail copy -->
+        <div class="tactile-right reveal-right" style="--reveal-delay: 100ms">
+          <div class="tactile-tag">Tactile Interface</div>
+          <h2 class="tactile-title">
+            Custom shortcuts? Sure. Hardware sync? Check.
+          </h2>
+          <h3 class="tactile-subtitle">Your Go-To for Every Edit</h3>
+          <button class="btn btn-primary btn-animated" id="btn-tactile-more">
+            <span class="btn-text-inner"><span class="btn-label">Learn more</span><span class="btn-label-clone">Learn
+                more</span></span>
+          </button>
+        </div>
+
+      </section>
+
+      <!-- TESTIMONIALS (Bento Grid Style) -->
+      <section class="testimonials-section" id="reviews">
+        <h2 class="block-title-large reveal-up">Hear it from our editors</h2>
+
+        <div class="testimonials-grid">
+
+          <!-- Card 1 -->
+          <div class="testimonial-card reveal-up" style="--reveal-delay: 0ms">
+            <div class="testimonial-user">
+              <div class="user-avatar avatar-cyan">VK</div>
+              <span class="user-name">Vamsi K.</span>
+            </div>
+            <p class="testimonial-text">
+              "Very happy with the website. Does what it says, simple rendering and transitions. Quick cloud exports.
+              24/7 support available."
+            </p>
+            <div class="testimonial-rating">
+              <span class="material-symbols-outlined rating-star">star</span>
+              <span class="material-symbols-outlined rating-star">star</span>
+              <span class="material-symbols-outlined rating-star">star</span>
+              <span class="material-symbols-outlined rating-star">star</span>
+              <span class="material-symbols-outlined rating-star">star</span>
+            </div>
+          </div>
+
+          <!-- Card 2 (Cyan accented middle card) -->
+          <div class="testimonial-card testimonial-card-center reveal-up" style="--reveal-delay: 120ms">
+            <div class="testimonial-user">
+              <div class="user-avatar avatar-white">LA</div>
+              <span class="user-name">Leonie A.</span>
+            </div>
+            <p class="testimonial-text">
+              "Awesome website very user friendly. Would highly recommend SARJ - CAM to my fellow creators who love that
+              retro vibe."
+            </p>
+            <div class="testimonial-rating">
+              <span class="material-symbols-outlined rating-star rating-star-cyan">star</span>
+              <span class="material-symbols-outlined rating-star rating-star-cyan">star</span>
+              <span class="material-symbols-outlined rating-star rating-star-cyan">star</span>
+              <span class="material-symbols-outlined rating-star rating-star-cyan">star</span>
+              <span class="material-symbols-outlined rating-star rating-star-cyan">star</span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="testimonial-card reveal-up" style="--reveal-delay: 240ms">
+            <div class="testimonial-user">
+              <div class="user-avatar avatar-pink">KR</div>
+              <span class="user-name">Karl R.</span>
+            </div>
+            <p class="testimonial-text">
+              "The best editing solution. I've been a user for a few years! The support was always great and I'm always
+              able to push my edits without any problem."
+            </p>
+            <div class="testimonial-rating">
+              <span class="material-symbols-outlined rating-star">star</span>
+              <span class="material-symbols-outlined rating-star">star</span>
+              <span class="material-symbols-outlined rating-star">star</span>
+              <span class="material-symbols-outlined rating-star">star</span>
+              <span class="material-symbols-outlined rating-star">star</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="final-cta" id="cta-section">
+      <div class="cta-header-row">
+        <div class="lang-selector" role="button" aria-haspopup="true">
+          <span class="material-symbols-outlined" style="font-size: 16px;">language</span>
+          <span>EN</span>
+          <span class="material-symbols-outlined" style="font-size: 16px;">expand_more</span>
+        </div>
+        <div class="made-by">Made by SARJ</div>
+      </div>
+
+      <div class="cta-giant-text" id="cta-giant">SARJ</div>
+
+      <div class="cta-panel reveal-up">
+        <h2 class="cta-panel-title">Let's start your journey</h2>
+        <p class="cta-panel-text">It only takes a few seconds to get started.</p>
+        <a href="/login.html#signup" class="btn btn-primary btn-animated" id="btn-panel-cta">
+          <span class="btn-text-inner"><span class="btn-label">Sign Up Now</span><span class="btn-label-clone">Sign Up
+              Now</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer-section">
+      <div class="footer-content">
+
+        <!-- Footer Links Grid -->
+        <div class="footer-links-grid">
+          <div class="footer-col">
+            <h4 class="footer-col-title">Get Started</h4>
+            <a href="/login.html#signup" class="footer-link">Sign up</a>
+            <a href="/login.html#login" class="footer-link">Login</a>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-col-title">Discover</h4>
+            <a href="#features" class="footer-link">Features</a>
+            <a href="#pricing" class="footer-link">Pricing</a>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-col-title">Company</h4>
+            <a href="#about" class="footer-link">About</a>
+            <a href="#newsroom" class="footer-link">Newsroom</a>
+            <a href="#partnerships" class="footer-link">Partnerships</a>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-col-title">Legal</h4>
+            <a href="#cookies" class="footer-link">Cookie Policy</a>
+            <a href="#privacy" class="footer-link">Privacy Policy</a>
+            <a href="#terms" class="footer-link">Terms and Conditions</a>
+          </div>
+          <div class="footer-col">
+            <h4 class="footer-col-title">Help</h4>
+            <a href="#devs" class="footer-link">Developers</a>
+            <a href="#faq" class="footer-link">FAQ</a>
+            <a href="#support" class="footer-link">Support</a>
+          </div>
+        </div>
+
+        <!-- Footer Bottom Section -->
+        <div class="footer-bottom-row">
+          <div class="store-badges">
+            <button class="badge-btn" aria-label="Get it on Google Play">
+              <span class="material-symbols-outlined badge-icon">play_arrow</span>
+              <div class="badge-text-container">
+                <span class="badge-sub">Get it on</span>
+                <span class="badge-main">Google Play</span>
+              </div>
+            </button>
+
+            <button class="badge-btn" aria-label="Download on the App Store">
+              <span class="material-symbols-outlined badge-icon">apple</span>
+              <div class="badge-text-container">
+                <span class="badge-sub">Download on the</span>
+                <span class="badge-main">App Store</span>
+              </div>
+            </button>
+          </div>
+
+          <div class="social-links">
+            <a href="#instagram" class="social-btn" aria-label="Instagram"><span
+                class="material-symbols-outlined">photo_camera</span></a>
+            <a href="#facebook" class="social-btn" aria-label="Facebook"><span
+                class="material-symbols-outlined">thumb_up</span></a>
+            <a href="#twitter" class="social-btn" aria-label="Twitter"><span
+                class="material-symbols-outlined">close</span></a>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Entry JavaScript file -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
